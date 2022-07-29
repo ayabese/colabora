@@ -1,6 +1,5 @@
 # Ignore docker postgresql data folders
-docker/postgresql/data/*
-docker/postgresql/dumps/*
+docker/*
 
 # Dump files
 *.dump

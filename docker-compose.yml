@@ -8,7 +8,7 @@ services:
     tmpfs:
       - /tmp
     env_file:
-      - docker/env/rails.env
+      - ./docker/env/rails.env
     build:
       context: .
       args:
@@ -17,7 +17,7 @@ services:
         - PROJECT_FOLDER=${PROJECT_FOLDER:-colabora}
     volumes:
       - .:/colabora
-      - bundle:/usr/local/bundle
+      - ./docker/rails/bundle:/usr/local/bundle
     command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     ports:
       - 3000:3000
@@ -32,6 +32,8 @@ services:
     tty: true
     image: postgres:13
     shm_size: '1gb'
+    env_file:
+      - ./docker/env/postgres.env
     volumes:
       - ./docker/postgresql/data:/var/lib/postgresql/data
       - ./docker/postgresql/dumps:/docker-entrypoint-initdb.d
@@ -47,14 +49,14 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - redis_data:/data
+      - ./docker/redis/data:/data
     networks:
       colabora_network:
 
 volumes:
+  web:
   postgres:
-  redis_data:
-  bundle:
+  redis:
 
 networks:
   colabora_network:
