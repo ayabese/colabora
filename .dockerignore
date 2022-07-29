@@ -1,0 +1,18 @@
+# Ignore docker postgresql data folders
+docker/postgresql/data/*
+docker/postgresql/dumps/*
+
+# Dump files
+*.dump
+*.dmp
+*.rdb
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+!/tmp/pids/*
+
+# Node
+node_modules
