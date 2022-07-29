@@ -7,12 +7,18 @@ services:
     shm_size: '256mb'
     tmpfs:
       - /tmp
+    env_file:
+      - docker/env/rails.env
     build:
       context: .
-    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - PROJECT_FOLDER=${PROJECT_FOLDER:-colabora}
     volumes:
-      - .:/app
+      - .:/colabora
       - bundle:/usr/local/bundle
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     ports:
       - 3000:3000
     depends_on:
