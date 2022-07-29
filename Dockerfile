@@ -23,9 +23,7 @@ RUN adduser --system --shell /bin/bash --disabled-password --gecos '' --uid $UID
 RUN adduser user sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-USER user
-
-RUN sudo gem update --system && gem install bundler
+RUN gem update --system && gem install bundler
 
 WORKDIR $PROJECT_FOLDER
 
