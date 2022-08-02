@@ -16,6 +16,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     libpq-dev \
     postgresql-client \
     sudo \
+    npm \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN addgroup --system --gid $GID  user
@@ -24,6 +25,7 @@ RUN adduser user sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN gem update --system && gem install bundler
+RUN npm install yarn
 
 WORKDIR $PROJECT_FOLDER
 
