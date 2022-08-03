@@ -5,7 +5,10 @@ set -e
 rm -f /usr/src/app/tmp/pids/server.pid
 
 echo "bundle install..."
-bundle check || bundle install --jobs=$(nproc)
+bundle check || bundle install --system --jobs=$(nproc)
+
+echo "yarn install..."
+yarn install --check-files
 
 # Then exec the container's main process (what's set as CMD in the Dockerfile).
 exec "$@"

@@ -1,5 +1,6 @@
 # Ignore docker postgresql data folders
 docker/*
+!docker/entrypoint.sh
 
 # Dump files
 *.dump

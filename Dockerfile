@@ -19,18 +19,12 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     npm \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN addgroup --system --gid $GID  user
-RUN adduser --system --shell /bin/bash --disabled-password --gecos '' --uid $UID --gid $GID user
-RUN adduser user sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
+WORKDIR "/usr/local/bin"
 RUN gem update --system && gem install bundler
-RUN npm install yarn
+RUN npm install -g yarn
 
+COPY . $PROJECT_FOLDER
 WORKDIR $PROJECT_FOLDER
 
 ENTRYPOINT ["./docker/entrypoint.sh"]
-
 EXPOSE 3000
-
-CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
