@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
+  layout "clients/actions", only: [:show, :edit]
 
   # GET /clients or /clients.json
   def index

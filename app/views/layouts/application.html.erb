@@ -18,6 +18,7 @@
 
       aside {
         min-width: 15vw;
+        background-color: #ccc;
       }
 
       article {
@@ -53,19 +54,15 @@
       </nav>
     </header>
     <main>
-      <aside>
-      Side bar
-      <%= yield(:sidebar) %>
+      <%-if content_for?(:sidebar) %>
+        <aside>
+        <%= yield(:sidebar) %>
+      <% end %>
     </aside>
       <article>
         <%= yield %>
       </article>
     </main>
-    <!--%-if content_for?(:sidebar) %-->
-
-    <!--% end %-->
-
-
 
     <footer class="bg-dark text-center text-white">
       <!-- Grid container -->
